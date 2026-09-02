@@ -2,8 +2,13 @@ package com.github.smallinger.copperagebackport.neoforge.platform;
 
 import com.github.smallinger.copperagebackport.Constants;
 import com.github.smallinger.copperagebackport.registry.RegistryHelper;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -56,5 +61,21 @@ public class NeoForgeRegistryHelper extends RegistryHelper {
     @Override
     public void fireRegistrationCallbacks() {
         super.fireRegistrationCallbacks();
+    }
+
+    @Override
+    public Holder<ArmorMaterial> registerArmorMaterial(String name, Supplier<ArmorMaterial> materialSupplier) {
+        DeferredRegister<ArmorMaterial> deferredRegister = DeferredRegister.create(Registries.ARMOR_MATERIAL, MINECRAFT_NAMESPACE);
+        deferredRegister.register(modEventBus);
+
+        return deferredRegister.register(name, materialSupplier);
+    }
+
+    @Override
+    public Holder<SoundEvent> registerSoundEvent(String name, Supplier<SoundEvent> soundEventSupplier) {
+        DeferredRegister<SoundEvent> deferredRegister = DeferredRegister.create(Registries.SOUND_EVENT, MINECRAFT_NAMESPACE);
+        deferredRegister.register(modEventBus);
+
+        return deferredRegister.register(name, soundEventSupplier);
     }
 }

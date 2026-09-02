@@ -1,9 +1,12 @@
 package com.github.smallinger.copperagebackport.registry;
 
 import com.github.smallinger.copperagebackport.Constants;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.item.ArmorMaterial;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -208,12 +211,12 @@ public abstract class RegistryHelper {
      * Register under the mod's namespace (copperagebackport:)
      */
     public abstract <T> Supplier<T> register(ResourceKey<? extends Registry<? super T>> registry, String name, Supplier<T> supplier);
-    
+
     /**
      * Register under a specific namespace (minecraft: or copperagebackport:)
      */
     public abstract <T> Supplier<T> registerWithNamespace(ResourceKey<? extends Registry<? super T>> registry, String namespace, String name, Supplier<T> supplier);
-    
+
     /**
      * Register a backported entry under the minecraft: namespace.
      */
@@ -261,4 +264,7 @@ public abstract class RegistryHelper {
         return VANILLA_BACKPORT_IDS.contains(name);
     }
 
+    public abstract Holder<ArmorMaterial> registerArmorMaterial(String name, Supplier<ArmorMaterial> materialSupplier);
+
+    public abstract Holder<SoundEvent> registerSoundEvent(String name, Supplier<SoundEvent> soundEventSupplier);
 }
