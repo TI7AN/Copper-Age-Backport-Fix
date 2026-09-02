@@ -143,6 +143,6 @@ public class ModSounds {
     private static Holder<SoundEvent> registerSoundforHolder(RegistryHelper helper, String name) {
         // Register sounds under minecraft: namespace since they are vanilla backport features
         ResourceLocation id = ResourceLocation.withDefaultNamespace(name);
-        return helper.registerSoundEvent(name, () -> SoundEvent.createVariableRangeEvent(id));
+        return helper.registerAutoForHolder(Registries.SOUND_EVENT, name, () -> SoundEvent.createVariableRangeEvent(id));
     }
 }

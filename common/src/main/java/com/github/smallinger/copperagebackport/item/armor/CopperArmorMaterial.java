@@ -5,11 +5,9 @@ import com.github.smallinger.copperagebackport.ModSounds;
 import com.github.smallinger.copperagebackport.registry.RegistryHelper;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Items;
@@ -17,7 +15,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.EnumMap;
 import java.util.List;
-import java.util.function.Supplier;
 
 /**
  * Copper armor material with stats between Leather and Chain.
@@ -61,7 +58,8 @@ public class CopperArmorMaterial {
 //                new ArmorMaterial(enummap, 8, equipSound, () -> Ingredient.of(Items.COPPER_INGOT), layers, 0.0F, 0.0F)
 //        );
 
-        return RegistryHelper.getInstance().registerArmorMaterial(
+        return RegistryHelper.getInstance().registerAutoForHolder(
+                Registries.ARMOR_MATERIAL,
                 "copper",
                 () -> new ArmorMaterial(enummap, 8, equipSound, () -> Ingredient.of(Items.COPPER_INGOT), layers, 0.0F, 0.0F)
         );
